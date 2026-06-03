@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('SpendWise',style: TextStyle(fontSize: 28),),
+        centerTitle: true,
         backgroundColor: Color(0xFFC4C1CF),
       ),
       body: SafeArea(

@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'cubit/auth_cubit.dart';
 import 'cubit/expense_cubit.dart';
 import 'screens/splash_screen/splash_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const SpendWiseApp());
 }
 
@@ -12,28 +22,18 @@ class SpendWiseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ExpenseCubit(),
+    // MultiBlocProvider નો ઉપયોગ કરો
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ExpenseCubit()),
+        BlocProvider(create: (context) => AuthCubit()), // આ લાઇન ખૂટતી હતી
+      ],
       child: MaterialApp(
         title: 'SpendWise',
         debugShowCheckedModeBanner: false,
-
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF6750A4),
-            brightness: Brightness.light,
-          ),
-          appBarTheme: const AppBarTheme(
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            iconTheme: IconThemeData(color: Colors.black87),
-            titleTextStyle: TextStyle(
-              color: Colors.black87,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4)),
         ),
         home: const SplashScreen(),
       ),

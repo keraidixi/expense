@@ -14,7 +14,7 @@ class AddExpenseScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: const BoxDecoration(
-              color: Color(0xFFC3C1C1),
+              color: Color(0xFF958DAA),
               shape: BoxShape.circle,
             ),
             child: IconButton(

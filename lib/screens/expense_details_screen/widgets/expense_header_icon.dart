@@ -14,7 +14,7 @@ class ExpenseHeaderIcon extends StatelessWidget {
     return CategoryIcon(
       category: category,
       size: 200,
-      color: const Color(0xFF867F98),
+      color: const Color(0xFF958DAA),
     );
   }
 }
